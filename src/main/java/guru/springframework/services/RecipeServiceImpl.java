@@ -31,6 +31,16 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
+    public Recipe findByDescription(String description) {
+        Optional<Recipe> recipe = Optional.of(recipeRepository.findByDescription(description));
+        if(!recipe.isPresent())
+            throw new RuntimeException("Recipe Not Found");
+
+        return recipe.get();
+    }
+
+
+    @Override
     public Set<Recipe> getRecipes() {
         log.debug("I'm in the service");
 

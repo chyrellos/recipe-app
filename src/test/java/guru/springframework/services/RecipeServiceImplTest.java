@@ -65,4 +65,23 @@ public class RecipeServiceImplTest {
         verify(recipeRepository, times(1)).findAll();
     }
 
+    @Test
+    public void findByDescription() {
+        Recipe recipe = new Recipe();
+        recipe.setDescription("test");
+        recipe.setId(1L);
+
+        when(recipeRepository.findByDescription(anyString())).thenReturn(recipe);
+
+        Recipe recipes = recipeService.findByDescription("test");
+
+
+        assertEquals("test",recipes.getDescription());
+        verify(recipeRepository, times(1)).findByDescription(anyString());
+
+
+
+
+
+    }
 }

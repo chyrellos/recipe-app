@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -33,11 +34,13 @@ public class RecipeControllerTest {
     @Test
     public void getRecipe() throws Exception {
         Recipe recipe = new Recipe();
-        recipe.setId(2L);
+        recipe.setId(1L);
 
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(recipeController).build();
 
         when(recipeService.findById(anyLong())).thenReturn(recipe);
+
+
 
         mockMvc.perform(get("/recipe/show/1")).andExpect(status().isOk())
                 .andExpect(view().name("recipe/show"));
